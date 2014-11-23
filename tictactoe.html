@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>TIC TAC TOE</title>
+		<link rel="stylesheet" type="text/css" href="css3.css"/>
+		<script type="text/javascript">
+
+		//Global Variables
+		var painted;
+		var content;
+		var winningCombinations;
+		var turn = 0;
+		var theCanvas;
+		var c;
+		var cxt;
+		var squaresFilled = 0;
+		var w;
+		var y;
+		
+
+		//Instanciate Arrays
+		window.onload=function(){
+			
+			painted = new Array();
+			content = new Array();
+			winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+			for(var l = 0; l <= 8; l++){
+			painted[l] = false;
+			content[l]='';
+			}
+		}
+
+		//Game methods
+		function canvasClicked(canvasNumber){
+			theCanvas = "canvas"+canvasNumber;
+			c = document.getElementById(theCanvas);
+			cxt = c.getContext("2d");
+
+			if(painted[canvasNumber-1] ==false){
+				if(turn%2==0){
+					cxt.beginPath();
+					cxt.moveTo(10,10);
+					cxt.lineTo(60,60);
+					cxt.moveTo(60,10);
+					cxt.lineTo(10,60);
+					cxt.stroke();
+					cxt.closePath();
+					content[canvasNumber-1] = 'X';
+				}
+
+				else{
+					cxt.beginPath();
+					cxt.arc(35,35,30,30,Math.PI*2,true);
+					cxt.stroke();
+					cxt.closePath();
+					content[canvasNumber-1] = 'O';
+				}
+
+				turn++;
+				painted[canvasNumber-1] = true;
+				squaresFilled++;
+				checkForWinners(content[canvasNumber-1]);
+
+				if(squaresFilled==9){
+					alert("NO WINNER");
+					location.reload(true);
+				}
+			
+			}
+			else{
+				alert("Choose another one!");
+			}
+
+		}
+
+		function checkForWinners(symbol){
+			
+			for(var a = 0; a < winningCombinations.length; a++){
+			if(content[winningCombinations[a][0]]==symbol&&content[winningCombinations[a][1]]==	symbol&&content[winningCombinations[a][2]]==symbol){
+				alert(symbol+ " Winner");
+				playAgain();
+			}
+			}
+
+		}
+
+		function playAgain(){
+			y=confirm("Play Again?");
+			if(y==true){
+				location.reload(true);
+			}
+			else{
+				alert("So long Sucker!");
+		}
+
+		}
+    
+
+
+		</script>
+	</head>
+	<body bgcolor="#E6E6FA">
+	<br />
+	<br />
+		<div id ="box">
+			<h2>TIC TAC TOE</h2>
+			<canvas id = "canvas1"  width="70" height="70" style="border:3px solid red" onclick="canvasClicked(1)"></canvas>
+			<canvas id = "canvas2"  width="70" height="70" style="border:3px solid black" onclick="canvasClicked(2)"></canvas>
+			<canvas id = "canvas3"  width="70" height="70" style="border:3px solid red" onclick="canvasClicked(3)"></canvas><br/>
+			<canvas id = "canvas4"  width="70" height="70" style="border:3px solid black" onclick="canvasClicked(4)"></canvas>
+			<canvas id = "canvas5"  width="70" height="70" style="border:3px solid red" onclick="canvasClicked(5)"></canvas>
+			<canvas id = "canvas6"  width="70" height="70" style="border:3px solid black" onclick="canvasClicked(6)"></canvas><br/>
+			<canvas id = "canvas7"  width="70" height="70" style="border:3px solid red" onclick="canvasClicked(7)"></canvas>
+			<canvas id = "canvas8"  width="70" height="70" style="border:3px solid black" onclick="canvasClicked(8)"></canvas>
+			<canvas id = "canvas9"  width="70" height="70" style="border:3px solid red" onclick="canvasClicked(9)"></canvas>
+		</div>
+		<center>
+		<br>
+        <a href="tictactoe.html"> <button style="color:red">Restart</button></a>
+		<br><br>
+		<a href="index.html"><button>Back</button></a>
+	</body>
+</html>
+
+

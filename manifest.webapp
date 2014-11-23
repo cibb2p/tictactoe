@@ -1,0 +1,16 @@
+{
+  "name": "Tic Tac Toe",
+  "description": "Simple TicTacToe Multiplayer Game.",
+  "launch_path": "/index.html",
+  "icons": {
+    "512": "/img/icon-512.png",
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Ihsib Osmonaj",
+    "url": "http://twitter.com/0xmrcibb"
+  },
+  "default_locale": "en"
+  "fullscreen": "true"
+  "orientation":["portrait-primary"]
+}
